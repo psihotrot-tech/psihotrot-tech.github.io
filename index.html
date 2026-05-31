@@ -45,6 +45,11 @@ header{padding:72px 48px 56px;max-width:1100px;margin:0 auto}
 .btn-ghost{background:transparent;color:var(--ink2);border-color:var(--line)}
 .btn-ghost:hover{border-color:var(--ink2);color:var(--ink)}
 
+/* PHOTO */
+.h-inner{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:start}
+.h-photo{width:200px;height:260px;object-fit:cover;object-position:center top;border-radius:2px;flex-shrink:0}
+@media(max-width:720px){.h-inner{grid-template-columns:1fr}.h-photo{width:100%;height:240px}}
+
 /* DIVIDER */
 .divider{height:1px;background:var(--line);margin:0 48px}
 
@@ -150,14 +155,19 @@ footer p{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3)}
 <div class="en-content">
 
 <header>
-  <div class="h-eyebrow"><span class="h-dot"></span> Open to work · Subotica &amp; remote</div>
-  <div class="h-name">Sava<br><em>Pivnički</em></div>
-  <div class="h-title">// AI Product Builder · Psychologist · Prompt Engineer</div>
-  <div class="h-badge">Graduate psychologist who builds real products through AI</div>
-  <p class="h-desc">I build web applications that solve real business problems — AI-powered client tools, operational dashboards, and virtual assistants. I don't write code by hand. I use AI to build everything: I think through the problem, design the solution, and prompt my way to a finished product. Three live projects prove it works.</p>
-  <div class="h-links">
-    <a href="mailto:psihotrot@gmail.com" class="btn btn-primary">↗ psihotrot@gmail.com</a>
-    <a href="https://psihotrot-tech.github.io/preforma_usa/preforma_architect_eng.html" target="_blank" class="btn btn-ghost">View live work</a>
+  <div class="h-inner">
+    <div>
+      <div class="h-eyebrow"><span class="h-dot"></span> Open to work · Subotica &amp; remote</div>
+      <div class="h-name">Sava<br><em>Pivnički</em></div>
+      <div class="h-title">// AI Product Builder · Psychologist · Prompt Engineer</div>
+      <div class="h-badge">Graduate psychologist who builds real products through AI</div>
+      <p class="h-desc">I build web applications that solve real business problems — AI-powered client tools, operational dashboards, and virtual assistants. I don't write code by hand. I use AI to build everything: I think through the problem, design the solution, and prompt my way to a finished product. Three live projects prove it works.</p>
+      <div class="h-links">
+        <a href="mailto:psihotrot@gmail.com" class="btn btn-primary">↗ psihotrot@gmail.com</a>
+        <a href="https://psihotrot-tech.github.io/preforma_usa/preforma_architect_eng.html" target="_blank" class="btn btn-ghost">View live work</a>
+      </div>
+    </div>
+    <img src="foto.jpg" alt="Sava Pivnički" class="h-photo">
   </div>
 </header>
 
@@ -337,7 +347,7 @@ footer p{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3)}
       </div>
       <div class="contact-actions">
         <a href="mailto:psihotrot@gmail.com" class="contact-email">psihotrot@gmail.com</a>
-        <a href="https://psihotrot-tech.github.io" target="_blank" class="contact-note">psihotrot-tech.github.io</a>
+        <a href="https://psihotrot-tech.github.io" target="_blank" class="contact-note">github.io/psihotrot-tech →</a>
         <a href="tel:+381611050945" class="contact-note">+381 61 105 0945</a>
       </div>
     </div>
@@ -357,14 +367,19 @@ footer p{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3)}
 <div class="sr-content">
 
 <header>
-  <div class="h-eyebrow"><span class="h-dot"></span> Tražim posao · Subotica i remote</div>
-  <div class="h-name">Sava<br><em>Pivnički</em></div>
-  <div class="h-title">// AI Product Builder · Psiholog · Prompt Engineer</div>
-  <div class="h-badge">Diplomirani psiholog koji gradi stvarne produkte kroz AI</div>
-  <p class="h-desc">Pravim web aplikacije koje rešavaju stvarne poslovne probleme — AI alate, operativne dashboarde i virtuelne asistente. Ne pišem kod ručno. Sve gradim kroz AI: razmislim o problemu, osmislim rešenje i promptovanjem stignem do gotovog produkta. Tri živa projekta dokazuju da to funkcioniše.</p>
-  <div class="h-links">
-    <a href="mailto:psihotrot@gmail.com" class="btn btn-primary">↗ psihotrot@gmail.com</a>
-    <a href="https://psihotrot-tech.github.io/preforma_usa/preforma_architect_eng.html" target="_blank" class="btn btn-ghost">Pogledaj radove</a>
+  <div class="h-inner">
+    <div>
+      <div class="h-eyebrow"><span class="h-dot"></span> Tražim posao · Subotica i remote</div>
+      <div class="h-name">Sava<br><em>Pivnički</em></div>
+      <div class="h-title">// AI Product Builder · Psiholog · Prompt Engineer</div>
+      <div class="h-badge">Diplomirani psiholog koji gradi stvarne produkte kroz AI</div>
+      <p class="h-desc">Pravim web aplikacije koje rešavaju stvarne poslovne probleme — AI alate, operativne dashboarde i virtuelne asistente. Ne pišem kod ručno. Sve gradim kroz AI: razmislim o problemu, osmislim rešenje i promptovanjem stignem do gotovog produkta. Tri živa projekta dokazuju da to funkcioniše.</p>
+      <div class="h-links">
+        <a href="mailto:psihotrot@gmail.com" class="btn btn-primary">↗ psihotrot@gmail.com</a>
+        <a href="https://psihotrot-tech.github.io/preforma_usa/preforma_architect_eng.html" target="_blank" class="btn btn-ghost">Pogledaj radove</a>
+      </div>
+    </div>
+    <img src="foto.jpg" alt="Sava Pivnički" class="h-photo">
   </div>
 </header>
 
