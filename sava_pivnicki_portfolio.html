@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sava Pivnički — Developer & Product Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0e0c;--ink2:#3d3b36;--ink3:#7a7670;
+  --paper:#f5f2eb;--paper2:#ede9df;--paper3:#e3ddd1;
+  --accent:#c44d2e;--accent2:#1a4a6b;--green:#2c6e49;
+  --line:rgba(15,14,12,0.12);
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* LANG SWITCHER */
+.lang-bar{background:var(--ink);padding:10px 48px;display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.lang-btn{font-family:'DM Mono',monospace;font-size:11px;padding:5px 14px;border-radius:2px;border:1px solid rgba(245,242,235,.2);color:rgba(245,242,235,.5);background:transparent;cursor:pointer;letter-spacing:.08em;transition:all .15s}
+.lang-btn.active{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.lang-btn:hover:not(.active){border-color:rgba(245,242,235,.5);color:rgba(245,242,235,.8)}
+
+/* LANG CONTENT */
+.en-content{display:block}
+.sr-content{display:none}
+body.sr .en-content{display:none}
+body.sr .sr-content{display:block}
+
+/* HEADER */
+header{padding:72px 48px 56px;max-width:1100px;margin:0 auto}
+.h-eyebrow{font-family:'DM Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.h-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.h-name{font-family:'DM Serif Display',serif;font-size:clamp(52px,8vw,96px);line-height:.95;color:var(--ink);margin-bottom:8px}
+.h-name em{font-style:italic;color:var(--accent2)}
+.h-title{font-family:'DM Mono',monospace;font-size:13px;color:var(--ink3);letter-spacing:.08em;margin-bottom:28px}
+.h-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(44,110,73,.12);border:1px solid rgba(44,110,73,.25);border-radius:2px;padding:6px 14px;font-family:'DM Mono',monospace;font-size:11px;color:var(--green);margin-bottom:24px;letter-spacing:.06em}
+.h-desc{font-size:17px;color:var(--ink2);max-width:580px;line-height:1.75;margin-bottom:36px}
+.h-links{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:2px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;text-decoration:none;transition:all .2s;border:1.5px solid transparent}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-primary:hover{background:transparent;color:var(--accent)}
+.btn-ghost{background:transparent;color:var(--ink2);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--ink2);color:var(--ink)}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--line);margin:0 48px}
+
+/* SECTION */
+section{padding:72px 48px;max-width:1100px;margin:0 auto}
+.sec-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3);letter-spacing:.18em;text-transform:uppercase;margin-bottom:44px;display:flex;align-items:center;gap:16px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--line)}
+
+/* PSYCH CALLOUT */
+.psych-callout{border-left:3px solid var(--accent);padding:20px 24px;background:rgba(196,77,46,.04);margin-bottom:44px;border-radius:0 2px 2px 0}
+.psych-callout p{font-size:15px;color:var(--ink2);line-height:1.7;font-style:italic}
+.psych-callout span{font-style:normal;font-weight:600;color:var(--ink)}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.skill-block{padding:22px;border:1px solid var(--line);background:var(--paper2)}
+.skill-block h3{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;background:var(--paper3);color:var(--ink2);border-radius:2px}
+.tag.r{background:rgba(196,77,46,.1);color:var(--accent)}
+.tag.b{background:rgba(26,74,107,.1);color:var(--accent2)}
+.tag.g{background:rgba(44,110,73,.1);color:var(--green)}
+
+/* PROJECTS */
+.projects{display:flex;flex-direction:column}
+.project{display:grid;grid-template-columns:64px 1fr auto;border-top:1px solid var(--line);padding:36px 0;align-items:start}
+.project:last-child{border-bottom:1px solid var(--line)}
+.proj-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3);padding-top:4px}
+.proj-body{padding:0 36px}
+.proj-chips{display:flex;gap:7px;margin-bottom:10px;flex-wrap:wrap}
+.chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border-radius:2px;letter-spacing:.05em}
+.chip-ai{background:rgba(26,74,107,.1);color:var(--accent2)}
+.chip-data{background:rgba(44,110,73,.1);color:var(--green)}
+.chip-prod{background:rgba(196,77,46,.1);color:var(--accent)}
+.proj-title{font-family:'DM Serif Display',serif;font-size:26px;line-height:1.1;color:var(--ink);margin-bottom:10px}
+.proj-desc{font-size:15px;color:var(--ink2);line-height:1.7;max-width:540px;margin-bottom:18px}
+.proj-insight{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);margin-bottom:18px;letter-spacing:.04em}
+.proj-insight::before{content:'→ '}
+.proj-metrics{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:18px}
+.metric-val{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--ink)}
+.metric-lbl{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.proj-tech{display:flex;gap:7px;flex-wrap:wrap}
+.tech-pill{font-family:'DM Mono',monospace;font-size:10px;padding:3px 8px;border:1px solid var(--line);color:var(--ink3);border-radius:2px}
+.proj-link{display:flex;flex-direction:column;gap:8px;align-items:flex-end;padding-top:4px;min-width:100px}
+.link-btn{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3);text-decoration:none;border:1px solid var(--line);padding:7px 13px;border-radius:2px;white-space:nowrap;transition:all .15s;background:transparent;display:inline-block;text-align:center}
+.link-btn:hover{border-color:var(--ink2);color:var(--ink)}
+.link-btn.live{background:var(--accent);color:#fff;border-color:var(--accent)}
+.link-btn.live:hover{background:transparent;color:var(--accent)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.about-text p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:18px}
+.about-text p:last-child{margin-bottom:0}
+.values{display:flex;flex-direction:column;gap:22px}
+.value{display:flex;gap:18px;align-items:flex-start}
+.value-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);min-width:26px;padding-top:3px}
+.value-text h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.value-text p{font-size:14px;color:var(--ink2);line-height:1.6}
+
+/* CONTACT */
+.contact-block{background:var(--ink);padding:64px 48px}
+.contact-wrap{max-width:1100px;margin:0 auto}
+.contact-sec-label{font-family:'DM Mono',monospace;font-size:11px;color:rgba(245,242,235,.3);letter-spacing:.18em;text-transform:uppercase;margin-bottom:40px;display:flex;align-items:center;gap:16px}
+.contact-sec-label::after{content:'';flex:1;height:1px;background:rgba(245,242,235,.1)}
+.contact-inner{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+.contact-heading{font-family:'DM Serif Display',serif;font-size:clamp(34px,5vw,54px);color:var(--paper);line-height:1.05;margin-bottom:16px}
+.contact-heading em{font-style:italic}
+.contact-sub{font-size:15px;color:rgba(245,242,235,.55);max-width:400px;line-height:1.7}
+.contact-actions{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.contact-email{font-family:'DM Mono',monospace;font-size:13px;color:var(--paper);text-decoration:none;border-bottom:1px solid rgba(245,242,235,.25);padding-bottom:4px;transition:border-color .15s}
+.contact-email:hover{border-color:var(--paper)}
+.contact-note{font-family:'DM Mono',monospace;font-size:11px;color:rgba(245,242,235,.4);text-decoration:none}
+
+/* FOOTER */
+footer{padding:28px 48px;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer p{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3)}
+
+@media(max-width:720px){
+  .lang-bar{padding:10px 24px}
+  header,section{padding:48px 24px}
+  .divider{margin:0 24px}
+  .about-grid{grid-template-columns:1fr}
+  .project{grid-template-columns:1fr;gap:14px}
+  .proj-body{padding:0}
+  .proj-link{flex-direction:row;align-items:center;flex-wrap:wrap}
+  .contact-inner{grid-template-columns:1fr}
+  .contact-actions{align-items:flex-start}
+  .contact-block{padding:48px 24px}
+  footer{padding:24px}
+}
+</style>
+</head>
+<body class="en">
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('sr')">SR</button>
+</div>
+
+<!-- ═══════════════════════════════ ENGLISH ═══════════════════════════════ -->
+
+<div class="en-content">
+
+<header>
+  <div class="h-eyebrow"><span class="h-dot"></span> Open to work · Subotica &amp; remote</div>
+  <div class="h-name">Sava<br><em>Pivnički</em></div>
+  <div class="h-title">// AI Product Builder · Psychologist · Prompt Engineer</div>
+  <div class="h-badge">Graduate psychologist who builds real products through AI</div>
+  <p class="h-desc">I build web applications that solve real business problems — AI-powered client tools, operational dashboards, and virtual assistants. I don't write code by hand. I use AI to build everything: I think through the problem, design the solution, and prompt my way to a finished product. Three live projects prove it works.</p>
+  <div class="h-links">
+    <a href="mailto:psihotrot@gmail.com" class="btn btn-primary">↗ psihotrot@gmail.com</a>
+    <a href="https://psihotrot-tech.github.io/preforma_usa/preforma_architect_eng.html" target="_blank" class="btn btn-ghost">View live work</a>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<section>
+  <div class="sec-label">Skills &amp; tools</div>
+  <div class="psych-callout">
+    <p><span>Graduate psychologist turned product builder.</span> I understand how people think, decide, and behave — and I build tools around those patterns. PreForma exists because I could design the behavioral model. The code followed.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <h3>AI-assisted building</h3>
+      <div class="tags">
+        <span class="tag r">Prompt engineering</span>
+        <span class="tag r">AI product design</span>
+        <span class="tag r">Structured outputs</span>
+        <span class="tag">Data dashboards</span>
+        <span class="tag">Responsive UI</span>
+        <span class="tag">XLSX parsing</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>AI &amp; Integrations</h3>
+      <div class="tags">
+        <span class="tag b">Claude API</span>
+        <span class="tag b">Prompt Engineering</span>
+        <span class="tag b">AI Product Design</span>
+        <span class="tag">LemonSqueezy</span>
+        <span class="tag">Structured outputs</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Psychology &amp; Product</h3>
+      <div class="tags">
+        <span class="tag g">Behavioral analysis</span>
+        <span class="tag g">Decision psychology</span>
+        <span class="tag g">End-to-end delivery</span>
+        <span class="tag">Real client work</span>
+        <span class="tag">Serbian / English</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="sec-label">Selected work</div>
+  <div class="projects">
+
+    <div class="project">
+      <div class="proj-num">01</div>
+      <div class="proj-body">
+        <div class="proj-chips">
+          <span class="chip chip-ai">AI-powered</span>
+          <span class="chip chip-prod">SaaS · Live</span>
+        </div>
+        <div class="proj-title">PreForma</div>
+        <p class="proj-desc">Client intelligence platform for architects and interior designers. Analyzes client behavior before the first meeting and auto-generates a risk-adjusted contract, project scope, communication strategy, and behavioral profile.</p>
+        <div class="proj-insight">Built on behavioral psychology — I designed the risk model, then built the product around it</div>
+        <div class="proj-metrics">
+          <div><div class="metric-val">4</div><div class="metric-lbl">Auto docs per client</div></div>
+          <div><div class="metric-val">10</div><div class="metric-lbl">Project types</div></div>
+          <div><div class="metric-val">$39</div><div class="metric-lbl">Live pricing</div></div>
+        </div>
+        <div class="proj-tech">
+          <span class="tech-pill">Vanilla JS</span>
+          <span class="tech-pill">Claude API</span>
+          <span class="tech-pill">LemonSqueezy</span>
+          <span class="tech-pill">HTML/CSS</span>
+        </div>
+      </div>
+      <div class="proj-link">
+        <a href="https://psihotrot-tech.github.io/preforma_usa/preforma_architect_eng.html" target="_blank" class="link-btn live">↗ Live site</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="proj-num">02</div>
+      <div class="proj-body">
+        <div class="proj-chips">
+          <span class="chip chip-ai">AI assistant</span>
+          <span class="chip chip-prod">Live · Production</span>
+        </div>
+        <div class="proj-title">Virtuelna Danica — SKAS</div>
+        <p class="proj-desc">Virtual assistant for the Serbian Trotting Association. Handles registrations, rulebook queries, race calendar, live stream links, horse entry forms, and institutional documents for an active sports organization.</p>
+        <div class="proj-insight">Designed the information architecture by understanding how users actually look for things</div>
+        <div class="proj-metrics">
+          <div><div class="metric-val">8+</div><div class="metric-lbl">Feature modules</div></div>
+          <div><div class="metric-val">2026</div><div class="metric-lbl">Active season</div></div>
+        </div>
+        <div class="proj-tech">
+          <span class="tech-pill">Vanilla JS</span>
+          <span class="tech-pill">Claude API</span>
+          <span class="tech-pill">HTML/CSS</span>
+          <span class="tech-pill">Domain research</span>
+        </div>
+      </div>
+      <div class="proj-link">
+        <a href="https://psihotrot-tech.github.io/skas/" target="_blank" class="link-btn live">↗ Live site</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="proj-num">03</div>
+      <div class="proj-body">
+        <div class="proj-chips">
+          <span class="chip chip-data">Data analytics</span>
+          <span class="chip chip-prod">Private client</span>
+        </div>
+        <div class="proj-title">TransportAnaliza Pro</div>
+        <p class="proj-desc">Full transport cost analytics dashboard built from real operational data — 23 trip orders, two vehicles, two drivers. Fuel costs, tolls, per-km breakdown, own vs. external carrier comparison, and annual projections.</p>
+        <div class="proj-insight">Client needed business clarity, not just data — so I structured the analysis around their actual decision</div>
+        <div class="proj-metrics">
+          <div><div class="metric-val">23</div><div class="metric-lbl">Real trip orders</div></div>
+          <div><div class="metric-val">8</div><div class="metric-lbl">Dashboard views</div></div>
+        </div>
+        <div class="proj-tech">
+          <span class="tech-pill">Vanilla JS</span>
+          <span class="tech-pill">Chart.js</span>
+          <span class="tech-pill">XLSX parsing</span>
+          <span class="tech-pill">Business logic</span>
+        </div>
+      </div>
+      <div class="proj-link">
+        <span class="link-btn" style="cursor:default;opacity:.5">Private client</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="sec-label">About</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a graduate psychologist who builds digital products entirely through AI-assisted development — no manual coding. I don't write JavaScript by hand. I think through problems, design solutions, and use AI to turn them into working software.</p>
+      <p>Everything I've built was for a real client or a real problem. I shipped a live SaaS product with payment integration, a production assistant for a national sports organization, and a business analytics tool from raw operational data.</p>
+      <p>I'm looking for a role where domain knowledge, product thinking, and AI fluency matter as much as syntax. I'm available immediately, based in Subotica, and open to remote work.</p>
+    </div>
+    <div class="values">
+      <div class="value">
+        <span class="value-num">01</span>
+        <div class="value-text">
+          <h4>Psychology informs the product</h4>
+          <p>I understand why users behave the way they do — and build accordingly. That's not a soft skill. It's the reason PreForma works.</p>
+        </div>
+      </div>
+      <div class="value">
+        <span class="value-num">02</span>
+        <div class="value-text">
+          <h4>Real delivery, not experiments</h4>
+          <p>Three live products. Real users. One with a payment system. The portfolio isn't a demo — it's a track record.</p>
+        </div>
+      </div>
+      <div class="value">
+        <span class="value-num">03</span>
+        <div class="value-text">
+          <h4>AI as the method, not a shortcut</h4>
+          <p>I don't use AI to speed up coding. I use it instead of coding. The craft is in knowing what to build and how to prompt for it precisely.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="contact-block">
+  <div class="contact-wrap">
+    <div class="contact-sec-label">Contact</div>
+    <div class="contact-inner">
+      <div>
+        <div class="contact-heading">Let's work<br><em>together.</em></div>
+        <p class="contact-sub">Open to frontend, AI product, and UX research roles. Available immediately. Based in Subotica, open to remote anywhere.</p>
+      </div>
+      <div class="contact-actions">
+        <a href="mailto:psihotrot@gmail.com" class="contact-email">psihotrot@gmail.com</a>
+        <a href="https://psihotrot-tech.github.io" target="_blank" class="contact-note">github.io/psihotrot-tech →</a>
+        <a href="tel:+381611050945" class="contact-note">+381 61 105 0945</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Sava Pivnički · 2026</p>
+  <p>AI Product Builder · Subotica, Serbia</p>
+</footer>
+
+</div><!-- /en-content -->
+
+
+<!-- ═══════════════════════════════ SRPSKI ═══════════════════════════════ -->
+
+<div class="sr-content">
+
+<header>
+  <div class="h-eyebrow"><span class="h-dot"></span> Tražim posao · Subotica i remote</div>
+  <div class="h-name">Sava<br><em>Pivnički</em></div>
+  <div class="h-title">// AI Product Builder · Psiholog · Prompt Engineer</div>
+  <div class="h-badge">Diplomirani psiholog koji gradi stvarne produkte kroz AI</div>
+  <p class="h-desc">Pravim web aplikacije koje rešavaju stvarne poslovne probleme — AI alate, operativne dashboarde i virtuelne asistente. Ne pišem kod ručno. Sve gradim kroz AI: razmislim o problemu, osmislim rešenje i promptovanjem stignem do gotovog produkta. Tri živa projekta dokazuju da to funkcioniše.</p>
+  <div class="h-links">
+    <a href="mailto:psihotrot@gmail.com" class="btn btn-primary">↗ psihotrot@gmail.com</a>
+    <a href="https://psihotrot-tech.github.io/preforma_usa/preforma_architect_eng.html" target="_blank" class="btn btn-ghost">Pogledaj radove</a>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<section>
+  <div class="sec-label">Veštine i alati</div>
+  <div class="psych-callout">
+    <p><span>Psiholog koji je postao product builder.</span> Razumem kako ljudi misle, donose odluke i ponašaju se — i pravim alate oko tih obrazaca. PreForma postoji zato što sam ja mogao da osmislim bihevioralni model. Kod je došao posle.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <h3>AI-asistirana izgradnja</h3>
+      <div class="tags">
+        <span class="tag r">Prompt engineering</span>
+        <span class="tag r">AI product dizajn</span>
+        <span class="tag r">Strukturisani output</span>
+        <span class="tag">Data dashboardi</span>
+        <span class="tag">Responsive UI</span>
+        <span class="tag">XLSX parsing</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>AI i integracije</h3>
+      <div class="tags">
+        <span class="tag b">Claude API</span>
+        <span class="tag b">Prompt engineering</span>
+        <span class="tag b">AI product design</span>
+        <span class="tag">LemonSqueezy</span>
+        <span class="tag">Strukturisani output</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Psihologija i produkt</h3>
+      <div class="tags">
+        <span class="tag g">Bihevioralna analiza</span>
+        <span class="tag g">Psihologija odluka</span>
+        <span class="tag g">End-to-end isporuka</span>
+        <span class="tag">Stvarni klijenti</span>
+        <span class="tag">Srpski / Engleski</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="sec-label">Odabrani radovi</div>
+  <div class="projects">
+
+    <div class="project">
+      <div class="proj-num">01</div>
+      <div class="proj-body">
+        <div class="proj-chips">
+          <span class="chip chip-ai">AI-powered</span>
+          <span class="chip chip-prod">SaaS · Živ produkt</span>
+        </div>
+        <div class="proj-title">PreForma</div>
+        <p class="proj-desc">Platforma za analizu klijenata za arhitekte i interior dizajnere. Analizira ponašanje klijenta pre prvog sastanka i automatski generiše ugovor prilagođen riziku, opseg projekta, komunikacionu strategiju i bihevioralni profil.</p>
+        <div class="proj-insight">Baziran na bihevioralnoj psihologiji — osmislio sam model rizika, pa tek onda napravio produkt</div>
+        <div class="proj-metrics">
+          <div><div class="metric-val">4</div><div class="metric-lbl">Dokumenta po klijentu</div></div>
+          <div><div class="metric-val">10</div><div class="metric-lbl">Vrsta projekata</div></div>
+          <div><div class="metric-val">$39</div><div class="metric-lbl">Živa cena</div></div>
+        </div>
+        <div class="proj-tech">
+          <span class="tech-pill">Vanilla JS</span>
+          <span class="tech-pill">Claude API</span>
+          <span class="tech-pill">LemonSqueezy</span>
+          <span class="tech-pill">HTML/CSS</span>
+        </div>
+      </div>
+      <div class="proj-link">
+        <a href="https://psihotrot-tech.github.io/preforma_usa/preforma_architect_eng.html" target="_blank" class="link-btn live">↗ Živ sajt</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="proj-num">02</div>
+      <div class="proj-body">
+        <div class="proj-chips">
+          <span class="chip chip-ai">AI asistent</span>
+          <span class="chip chip-prod">Živ · Produkcija</span>
+        </div>
+        <div class="proj-title">Virtuelna Danica — SKAS</div>
+        <p class="proj-desc">Virtuelni asistent Srpskog kasačkog saveza. Rešava registracije, upite o pravilnicima, kalendar trka, prijave konja i institucionalnu dokumentaciju za aktivnu sportsku organizaciju sa stvarnim korisnicima.</p>
+        <div class="proj-insight">Informacionu arhitekturu sam projektovao razumevanjem kako korisnici zaista traže informacije</div>
+        <div class="proj-metrics">
+          <div><div class="metric-val">8+</div><div class="metric-lbl">Funkcionalnih modula</div></div>
+          <div><div class="metric-val">2026</div><div class="metric-lbl">Aktivna sezona</div></div>
+        </div>
+        <div class="proj-tech">
+          <span class="tech-pill">Vanilla JS</span>
+          <span class="tech-pill">Claude API</span>
+          <span class="tech-pill">HTML/CSS</span>
+          <span class="tech-pill">Domensko istraživanje</span>
+        </div>
+      </div>
+      <div class="proj-link">
+        <a href="https://psihotrot-tech.github.io/skas/" target="_blank" class="link-btn live">↗ Živ sajt</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="proj-num">03</div>
+      <div class="proj-body">
+        <div class="proj-chips">
+          <span class="chip chip-data">Data analitika</span>
+          <span class="chip chip-prod">Privatni klijent</span>
+        </div>
+        <div class="proj-title">TransportAnaliza Pro</div>
+        <p class="proj-desc">Kompletan dashboard za analizu transportnih troškova iz stvarnih operativnih podataka — 23 putna naloga, dva vozila, dva vozača. Troškovi goriva, putarine, cena po km, poređenje sopstveni vs. eksterni prevoznik i godišnje projekcije.</p>
+        <div class="proj-insight">Klijent je trebao poslovnu jasnoću, ne samo podatke — strukturisao sam analizu oko njihove stvarne odluke</div>
+        <div class="proj-metrics">
+          <div><div class="metric-val">23</div><div class="metric-lbl">Stvarnih naloga</div></div>
+          <div><div class="metric-val">8</div><div class="metric-lbl">Prikaza dashboarda</div></div>
+        </div>
+        <div class="proj-tech">
+          <span class="tech-pill">Vanilla JS</span>
+          <span class="tech-pill">Chart.js</span>
+          <span class="tech-pill">XLSX parsing</span>
+          <span class="tech-pill">Poslovna logika</span>
+        </div>
+      </div>
+      <div class="proj-link">
+        <span class="link-btn" style="cursor:default;opacity:.5">Privatni klijent</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="sec-label">O meni</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Diplomirani sam psiholog koji gradi digitalne produkte isključivo kroz AI-asistiranu izgradnju — bez ručnog kodiranja. Ne pišem JavaScript ručno. Razmišljam o problemima, osmišljavam rešenja i koristim AI da ih pretvori u funkcionalni softver.</p>
+      <p>Sve što sam napravio bilo je za stvarnog klijenta ili stvarni problem. Isporučio sam živi SaaS produkt sa integracijom plaćanja, produkcionog asistenta za nacionalnu sportsku organizaciju i alat za poslovnu analitiku iz sirovih operativnih podataka.</p>
+      <p>Tražim ulogu u kojoj domensko znanje, product razmišljanje i AI fluency znače jednako koliko i sintaksa. Dostupan sam odmah, živim u Subotici i otvoren sam za remote rad.</p>
+    </div>
+    <div class="values">
+      <div class="value">
+        <span class="value-num">01</span>
+        <div class="value-text">
+          <h4>Psihologija informiše produkt</h4>
+          <p>Razumem zašto se korisnici ponašaju onako kako se ponašaju — i gradim u skladu s tim. To nije meka veština. To je razlog zbog kojeg PreForma funkcioniše.</p>
+        </div>
+      </div>
+      <div class="value">
+        <span class="value-num">02</span>
+        <div class="value-text">
+          <h4>Stvarna isporuka, ne eksperimenti</h4>
+          <p>Tri živa produkta. Pravi korisnici. Jedan sa sistemom plaćanja. Portfolio nije demo — to je rezultat.</p>
+        </div>
+      </div>
+      <div class="value">
+        <span class="value-num">03</span>
+        <div class="value-text">
+          <h4>AI kao metod, ne prečica</h4>
+          <p>Ne koristim AI da ubrzam kodiranje. Koristim ga umesto kodiranja. Zanat je u tome da znaš šta treba napraviti i kako to precizno ispromptovati.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="contact-block">
+  <div class="contact-wrap">
+    <div class="contact-sec-label">Kontakt</div>
+    <div class="contact-inner">
+      <div>
+        <div class="contact-heading">Hajde da<br><em>sarađujemo.</em></div>
+        <p class="contact-sub">Otvoren za frontend, AI product i UX istraživačke uloge. Dostupan odmah. Subotica, otvoren za remote.</p>
+      </div>
+      <div class="contact-actions">
+        <a href="mailto:psihotrot@gmail.com" class="contact-email">psihotrot@gmail.com</a>
+        <a href="https://psihotrot-tech.github.io" target="_blank" class="contact-note">github.io/psihotrot-tech →</a>
+        <a href="tel:+381611050945" class="contact-note">+381 61 105 0945</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Sava Pivnički · 2026</p>
+  <p>AI Product Builder · Subotica, Srbija</p>
+</footer>
+
+</div><!-- /sr-content -->
+
+<script>
+function setLang(lang) {
+  document.body.className = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.lang-btn[onclick="setLang(\''+lang+'\')"]').classList.add('active');
+  document.documentElement.lang = lang === 'sr' ? 'sr' : 'en';
+}
+</script>
+</body>
+</html>
